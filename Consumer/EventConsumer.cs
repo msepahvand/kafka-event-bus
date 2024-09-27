@@ -1,17 +1,13 @@
 ﻿using Confluent.Kafka;
-using Microsoft.Extensions.Configuration;
 
 namespace Consumer
 {
 	public class EventConsumer
 	{ 
-		public void Consume(string topic, IConfiguration config)
+		public void Consume(string topic, IEnumerable<KeyValuePair<string, string>> config)
 		{
-			config["group.id"] = "csharp-group-1";
-			config["auto.offset.reset"] = "earliest";			
-
 			// creates a new consumer instance
-			using IConsumer<string, string> consumer = new ConsumerBuilder<string, string>(config.AsEnumerable()).Build();
+			using IConsumer<string, string> consumer = new ConsumerBuilder<string, string>(config).Build();
 			consumer.Subscribe(topic);
 			while (true)
 			{

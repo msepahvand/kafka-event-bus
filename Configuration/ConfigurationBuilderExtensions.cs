@@ -4,14 +4,33 @@ namespace Configuration
 {
 	public static class ConfigurationBuilderExtensions
 	{
-		public static IConfiguration Load()
+		public static IEnumerable<KeyValuePair<string, string>> LoadProducerConfiguration()
 		{
-			// reads the client configuration from client.properties
-			// and returns it as a configuration object
-			return new ConfigurationBuilder()
+			return Load()
+				.Where(c =>
+				   !c.Key.Equals("session.timeout.ms")
+				&& !c.Key.Equals("group.id")
+				&& !c.Key.Equals("auto.offset.reset"));
+		}
+
+		public static IEnumerable<KeyValuePair<string, string>> LoadConsumerConfiguration()
+		{
+			return Load();
+		}
+
+		private static IEnumerable<KeyValuePair<string, string>> Load()
+		{
+			var config = new ConfigurationBuilder()
 			.SetBasePath(Directory.GetCurrentDirectory())
-			.AddIniFile("client.properties", false)
-			.Build();
+			.AddEnvironmentVariables(static (cfg) =>
+			{
+				cfg.Prefix = "KAFKA_CONFIG_PREFIX__";
+			})
+			.Build()
+			.AsEnumerable()
+			.Where(c => !string.IsNullOrWhiteSpace(c.Key) && !string.IsNullOrWhiteSpace(c.Value));
+
+			return config!;
 		}
 	}
 }

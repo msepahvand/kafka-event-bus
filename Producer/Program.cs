@@ -1,5 +1,4 @@
 ﻿using Configuration;
-using Microsoft.Extensions.Configuration;
 
 namespace Producer
 {
@@ -8,7 +7,7 @@ namespace Producer
 		const string topic = "Payments";
 		static void Main(string[] args)
 		{
-			IConfiguration config = ConfigurationBuilderExtensions.Load();
+			var config = ConfigurationBuilderExtensions.LoadProducerConfiguration();
 			Console.WriteLine("Start Producing:");
 			new EventProducer().Produce(topic, config);
 		}

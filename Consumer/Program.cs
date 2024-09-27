@@ -1,5 +1,4 @@
 ﻿using Configuration;
-using Microsoft.Extensions.Configuration;
 
 namespace Consumer
 {
@@ -8,7 +7,7 @@ namespace Consumer
 		const string topic = "Payments";
 		static void Main(string[] args)
 		{
-			IConfiguration config = ConfigurationBuilderExtensions.Load();
+			var config = ConfigurationBuilderExtensions.LoadConsumerConfiguration();
 			Console.WriteLine("Start Consuming:");
 			new EventConsumer().Consume(topic, config);			
 		}

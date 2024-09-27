@@ -1,5 +1,4 @@
 ﻿using Configuration;
-using Microsoft.Extensions.Configuration;
 using Producer;
 using System.Diagnostics;
 
@@ -11,7 +10,7 @@ namespace Clients
 		const string Topic = "Payments";
 		public static void Main(string[] args)
 		{
-			IConfiguration config = ConfigurationBuilderExtensions.Load();
+			var producerConfig = ConfigurationBuilderExtensions.LoadProducerConfiguration();
 			var producer = new EventProducer();
 
 			using (Process producerProcess = new())
@@ -29,7 +28,7 @@ namespace Clients
 				.ToList()
 				.ForEach(x =>
 			{
-				 producer.Produce(Topic, config);
+				producer.Produce(Topic, producerConfig);
 			});
 
 			_ = Console.ReadKey();

@@ -1,14 +1,18 @@
 ﻿using Confluent.Kafka;
-using Microsoft.Extensions.Configuration;
 
 namespace Producer
 {
 	public class EventProducer
 	{
-		public void Produce(string topic, IConfiguration config)
+		public void Produce(string topic, IEnumerable<KeyValuePair<string, string>> config)
 		{
+			var producerConfig = config.Where(c => 
+			       !c.Key.Equals("session.timeout.ms")
+				&& !c.Key.Equals("group.id")
+				&& !c.Key.Equals("auto.offset.reset"));
+
 			// creates a new producer instance
-			using IProducer<string, string> producer = new ProducerBuilder<string, string>(config.AsEnumerable()).Build();
+			using IProducer<string, string> producer = new ProducerBuilder<string, string>(producerConfig).Build();
 			// produces a sample message to the user-created topic and prints
 			// a message when successful or an error occurs
 			var message = new Message<string, string>
@@ -17,10 +21,10 @@ namespace Producer
 				Value = $"{Guid.NewGuid()}"
 
 			};
-			Console.ForegroundColor = (ConsoleColor.Red);
 
 			producer.Produce(topic, message, deliveryReport =>
 			{
+				Console.ForegroundColor = (ConsoleColor.Red);
 				Console.WriteLine(deliveryReport.Error.Code != ErrorCode.NoError
 				   ? $"Failed to deliver message: {deliveryReport.Error.Reason}"
 				   : $"Produced event to topic {topic}: key = {deliveryReport.Message.Key,-10} value = {deliveryReport.Message.Value}");
