@@ -28,8 +28,8 @@ namespace Clients
 				}
 
 			}
-			
-			Console.ReadKey();
+
+			_ = Console.ReadKey();
 		}
 	}
 }

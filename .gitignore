@@ -396,3 +396,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+# Confluent config
+*/*/client.properties
+client.properties
+*client.properties
+*/client.properties
