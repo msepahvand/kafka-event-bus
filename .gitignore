@@ -397,5 +397,7 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# VS
+**/Properties/launchSettings.json
 
 # Confluent config
