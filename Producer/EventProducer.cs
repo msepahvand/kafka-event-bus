@@ -8,7 +8,7 @@ namespace Producer
 		public void Produce(string topic, IConfiguration config)
 		{
 			// creates a new producer instance
-			using var producer = new ProducerBuilder<string, string>(config.AsEnumerable()).Build();
+			using IProducer<string, string> producer = new ProducerBuilder<string, string>(config.AsEnumerable()).Build();
 			// produces a sample message to the user-created topic and prints
 			// a message when successful or an error occurs
 			producer.Produce(topic, new Message<string, string>

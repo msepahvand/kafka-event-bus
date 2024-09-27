@@ -11,12 +11,12 @@ namespace Consumer
 			config["auto.offset.reset"] = "earliest";
 
 			// creates a new consumer instance
-			using var consumer = new ConsumerBuilder<string, string>(config.AsEnumerable()).Build();
+			using IConsumer<string, string> consumer = new ConsumerBuilder<string, string>(config.AsEnumerable()).Build();
 			consumer.Subscribe(topic);
 			while (true)
 			{
 				// consumes messages from the subscribed topic and prints them to the console
-				var cr = consumer.Consume();
+				ConsumeResult<string, string> cr = consumer.Consume();
 				Console.WriteLine($"Consumed event from topic {topic}: key = {cr.Message.Key,-10} value = {cr.Message.Value}");
 			}
 

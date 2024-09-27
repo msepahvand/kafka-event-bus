@@ -15,17 +15,15 @@ namespace Clients
 
 			while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape))
 			{
-				using (var producerProcess = new Process())
+				using (Process producerProcess = new())
 				{
 					producerProcess.StartInfo.FileName = $"{ClientsBasePath}\\Producer.exe";
 					producerProcess.Start();
 				}
 
-				using (var consumerProcess = new Process())
-				{
-					consumerProcess.StartInfo.FileName = $"{ClientsBasePath}\\Consumer.exe";
-					consumerProcess.Start();
-				}
+				using Process consumerProcess = new();
+				consumerProcess.StartInfo.FileName = $"{ClientsBasePath}\\Consumer.exe";
+				consumerProcess.Start();
 
 			}
 

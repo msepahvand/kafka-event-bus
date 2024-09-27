@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KafkaEventBus.Host.Console", "Clients\KafkaEventBus.Host.Console.csproj", "{ADB7EB99-99F6-4A2B-9FED-ACC648998198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KafkaEventBus.Host.Console", "Host\KafkaEventBus.Host.Console.csproj", "{ADB7EB99-99F6-4A2B-9FED-ACC648998198}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consumer", "Consumer\Consumer.csproj", "{1A264953-83DC-48FA-BB5F-8A5A6CA4280B}"
 EndProject
