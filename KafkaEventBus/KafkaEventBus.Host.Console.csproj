@@ -23,4 +23,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Configuration\Configuration.csproj" />
+    <ProjectReference Include="..\Consumer\Consumer.csproj" />
+    <ProjectReference Include="..\Producer\Producer.csproj" />
+  </ItemGroup>
+
 </Project>
