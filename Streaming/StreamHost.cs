@@ -10,7 +10,7 @@ namespace Streaming
 	{
 		public StreamHost() { }
 
-		public async Task StartAsync(string topic, IEnumerable<KeyValuePair<string, string>> cfg)
+		public async Task StartAsync(string topic1, string topic2, IEnumerable<KeyValuePair<string, string>> cfg)
 		{
 			var config = new StreamConfig<StringSerDes, StringSerDes>();
 			config.ApplicationId = "payments-test-streaming-app";
@@ -27,8 +27,8 @@ namespace Streaming
 			config.AllowAutoCreateTopics = false;
 			StreamBuilder builder = new StreamBuilder();
 
-			var kstream = builder.Stream<string, string>(topic);
-			var ktable = builder.Table("payment_status", InMemory.As<string, string>("table-store"));
+			var kstream = builder.Stream<string, string>(topic1);
+			var ktable = builder.Table(topic2, InMemory.As<string, string>("table-store"));
 
 			kstream.Join(ktable, (v, v1) => $"{v}-aggregated-{v1}")
 				   .To("payments_aggregated");
