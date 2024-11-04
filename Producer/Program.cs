@@ -4,7 +4,7 @@ namespace Producer
 {
 	public class Program
 	{
-		const string topic = "Payments";
+		const string topic = "payments";
 		static void Main(string[] args)
 		{
 			var config = ConfigurationBuilderExtensions.LoadProducerConfiguration();

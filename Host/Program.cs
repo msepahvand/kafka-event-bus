@@ -7,7 +7,7 @@ namespace Clients
 	public class Program
 	{
 		const string ClientsBasePath = "C:\\src\\kafka-event-bus\\Host\\bin\\Debug\\net8.0";
-		const string Topic = "Payments";
+		const string Topic = "payments";
 		public static void Main(string[] args)
 		{
 			var producerConfig = ConfigurationBuilderExtensions.LoadProducerConfiguration();
