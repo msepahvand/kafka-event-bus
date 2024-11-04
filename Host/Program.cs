@@ -7,7 +7,8 @@ namespace Clients
 	public class Program
 	{
 		const string ClientsBasePath = "C:\\src\\kafka-event-bus\\Host\\bin\\Debug\\net8.0";
-		const string Topic = "payments";
+		const string Topic1 = "payments";
+		const string Topic2 = "payment_status";
 		public static void Main(string[] args)
 		{
 			var producerConfig = ConfigurationBuilderExtensions.LoadProducerConfiguration();
@@ -33,7 +34,7 @@ namespace Clients
 				.ToList()
 				.ForEach(x =>
 			{
-				producer.Produce(Topic, producerConfig);
+				producer.Produce(Topic1, Topic2, producerConfig);
 			});
 
 			_ = Console.ReadKey();
