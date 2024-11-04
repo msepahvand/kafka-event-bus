@@ -21,6 +21,7 @@
     <ProjectReference Include="..\Configuration\Configuration.csproj" />    
     <ProjectReference Include="..\Consumer\Consumer.csproj" />
     <ProjectReference Include="..\Producer\Producer.csproj" />
+    <ProjectReference Include="..\Streaming\Streaming.Host.Console.csproj" />
   </ItemGroup>
 
 </Project>

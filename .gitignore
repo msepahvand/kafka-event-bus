@@ -399,5 +399,8 @@ FodyWeavers.xsd
 
 # VS
 **/Properties/launchSettings.json
+**/*/launchSettings.json
+*/launchSettings.json
+Host/Properties/launchSettings.json
 
 # Confluent config

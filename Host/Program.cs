@@ -23,6 +23,11 @@ namespace Clients
 				consumerProcess.StartInfo.FileName = $"{ClientsBasePath}\\Consumer.exe";
 				consumerProcess.Start();
 			}
+			using (Process consumerProcess = new())
+			{
+				consumerProcess.StartInfo.FileName = $"{ClientsBasePath}\\Streaming.Host.Console.exe";
+				consumerProcess.Start();
+			}
 
 			Enumerable.Range(0, 1000)
 				.ToList()
