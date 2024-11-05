@@ -1,5 +1,4 @@
-﻿using Configuration;
-using Confluent.Kafka;
+﻿using Confluent.Kafka;
 
 namespace Producer
 {

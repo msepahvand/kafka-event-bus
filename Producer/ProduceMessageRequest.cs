@@ -1,4 +1,4 @@
-﻿namespace Configuration
+﻿namespace Producer
 {
 	public record ProduceMessageRequest
 	{
