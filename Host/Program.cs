@@ -30,11 +30,28 @@ namespace Clients
 				consumerProcess.Start();
 			}
 
+			// Create some dummmy events
+			List<ProduceMessageRequest> produceMessageRequests =
+			[
+				new ProduceMessageRequest
+				{
+					Key = "EventId",
+					Topic = Topic1,
+					Value = Guid.NewGuid().ToString()
+				},
+				new ProduceMessageRequest
+				{
+					Key = "EventId",
+					Topic = Topic2,
+					Value = DateTime.Now.ToFileTimeUtc().ToString()
+				}
+			];
+
 			Enumerable.Range(0, 1000)
 				.ToList()
 				.ForEach(x =>
 			{
-				producer.Produce(Topic1, Topic2, producerConfig);
+				producer.Produce(produceMessageRequests, producerConfig);
 			});
 
 			_ = Console.ReadKey();
