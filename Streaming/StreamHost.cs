@@ -11,7 +11,7 @@ namespace Streaming
 	{
 		public StreamHost() { }
 
-		public async Task StartAsync(string topic1, string topic2, IEnumerable<KeyValuePair<string, string>> cfg)
+		public async Task StartAsync(string leftTopic, string rightTopic, string destinationTopic, IEnumerable<KeyValuePair<string, string>> cfg)
 		{
 			var config = new StreamConfig<StringSerDes, StringSerDes>();
 			config.ApplicationId = "payments-test-streaming-app";
@@ -20,7 +20,6 @@ namespace Streaming
 			config.SecurityProtocol = SecurityProtocol.SaslSsl;
 			config.AutoOffsetReset = AutoOffsetReset.Earliest;
 			config.CommitIntervalMs = 10 * 1000;
-
 			config.NumStreamThreads = 1;
 			config.SaslPassword = cfg.Get("sasl.password");
 			config.SaslUsername = cfg.Get("sasl.username");
@@ -28,11 +27,11 @@ namespace Streaming
 			config.AllowAutoCreateTopics = false;
 			StreamBuilder builder = new StreamBuilder();
 
-			var kstream = builder.Stream<string, string>(topic1);
-			var ktable = builder.Table(topic2, InMemory.As<string, string>("table-store"));
+			var kstream = builder.Stream<string, string>(leftTopic);
+			var ktable = builder.Table(rightTopic, InMemory.As<string, string>("table-store"));
 
 			kstream.Join(ktable, (v, v1) => $"{v}-aggregated-{v1}")
-				   .To("payments_aggregated");
+				   .To(destinationTopic);
 
 			Topology t = builder.Build();
 			KafkaStream stream = new KafkaStream(t, config);

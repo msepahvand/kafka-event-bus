@@ -11,7 +11,8 @@ namespace Consumer
 		{
 			var config = ConfigurationBuilderExtensions.LoadConsumerConfiguration();
 			Console.WriteLine("Start Consuming:");
-			new EventConsumer().Consume(topic1, topic2, topic3, config);
+
+			new EventConsumer().Consume([topic1, topic2, topic3], config);
 		}
 	}
 }

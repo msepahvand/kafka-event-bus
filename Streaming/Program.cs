@@ -10,7 +10,7 @@ namespace Streaming
 			var host = new StreamHost();
 
 			var config = ConfigurationBuilderExtensions.LoadConsumerConfiguration();
-			await host.StartAsync("payments", "payment_status", config);
+			await host.StartAsync("payments", "payment_status", "payments_aggregated", config);
 
 			Console.ReadLine();
 		}
