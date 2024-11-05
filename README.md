@@ -1,5 +1,5 @@
 # kafka-event-bus
-
+### Local setup
 Set the Configuration values in `launchSettings.json`:
 ```
 {
@@ -20,5 +20,8 @@ Set the Configuration values in `launchSettings.json`:
 	}
 }
 ```
-
+### Pub-Sub
 ![image](https://github.com/user-attachments/assets/38c6e214-5d87-4137-b361-17ba5b57ecf4)
+
+### Streaming with Streamiz
+![image](https://github.com/user-attachments/assets/722f9276-a49a-4aa3-9962-eb4e58eccfb3)
