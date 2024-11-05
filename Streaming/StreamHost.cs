@@ -3,6 +3,7 @@ using Streamiz.Kafka.Net.Stream;
 using Streamiz.Kafka.Net.Table;
 using Streamiz.Kafka.Net;
 using Confluent.Kafka;
+using Configuration;
 
 namespace Streaming
 {
@@ -14,15 +15,15 @@ namespace Streaming
 		{
 			var config = new StreamConfig<StringSerDes, StringSerDes>();
 			config.ApplicationId = "payments-test-streaming-app";
-			config.BootstrapServers = cfg.Single(x => x.Key == "bootstrap.servers").Value;
+			config.BootstrapServers = cfg.Get("bootstrap.servers");
 			config.SecurityProtocol = SecurityProtocol.SaslPlaintext;
 			config.SecurityProtocol = SecurityProtocol.SaslSsl;
 			config.AutoOffsetReset = AutoOffsetReset.Earliest;
 			config.CommitIntervalMs = 10 * 1000;
 
 			config.NumStreamThreads = 1;
-			config.SaslPassword = cfg.Single(x => x.Key == "sasl.password").Value;
-			config.SaslUsername = cfg.Single(x => x.Key == "sasl.username").Value;
+			config.SaslPassword = cfg.Get("sasl.password");
+			config.SaslUsername = cfg.Get("sasl.username");
 			config.SaslMechanism = SaslMechanism.Plain;
 			config.AllowAutoCreateTopics = false;
 			StreamBuilder builder = new StreamBuilder();

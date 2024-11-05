@@ -18,6 +18,11 @@ namespace Configuration
 			return Load();
 		}
 
+		public static string Get(this IEnumerable<KeyValuePair<string, string>> config, string key)
+		{
+			return config.Single(c => c.Key == key).Value;
+		}
+
 		private static IEnumerable<KeyValuePair<string, string>> Load()
 		{
 			var config = new ConfigurationBuilder()
